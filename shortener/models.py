@@ -33,13 +33,12 @@ class UrlHashMapping(ModelBase):
     url = StringField()
     hash = StringField()
 
-    meta = {
-
-    }
-
     def __str__(self):
         return "url: {} hash: {}".format(self.url, self.hash)
 
+    meta = {
+        "indexes": [{'fields': ['hash'], "unique": True}]
+    }
 
 
 
