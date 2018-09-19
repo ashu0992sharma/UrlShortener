@@ -30,6 +30,9 @@ class UrlEncodeTest(TestCase):
         data = {"url": "http://abc.com/abc"}
         resp = self.client.post(api, data)
         self.assertEqual(resp.status_code, 200)
+        data = {"url": "www.abc.com/abc"}
+        resp = self.client.post(api, data)
+        self.assertEqual(resp.status_code, 400)
 
 
 class UrlDecodeTest(TestCase):
@@ -45,33 +48,34 @@ class UrlDecodeTest(TestCase):
         url = "http://abc.com/abc"
         obj = self.create_obj(url)
 
+        # testing positive case
         api = reverse("url-decode")
         data = {"url": obj.hash}
         resp = self.client.post(api, data)
         self.assertEqual(resp.status_code, 200)
 
+        # testing negative case
+        data = {"url": ""}
+        resp = self.client.post(api, data)
+        self.assertEqual(resp.status_code, 400)
+
+        data = None
+        resp = self.client.post(api, data)
+        self.assertEqual(resp.status_code, 400)
+
 
 class ValidationTest(TestCase):
     """test cases for url and hash validation"""
 
-    def test_url_validation(self):
-        """testing url validation"""
-        url = "http://abc.com/abc"
-        validate_url = utils.validate_url(url)
-        validate_url = True if validate_url else False
-        self.assertEqual(validate_url, True)
-        url = "http:adsf"
-        validate_url = utils.validate_url(url)
-        validate_url = True if validate_url else False
-        self.assertEqual(validate_url, False)
-
     def test_hash_validation(self):
         """testing hash validation"""
+        # testing positive case
         hash = "An35sfad"
         validate_hash = utils.validate_hash(hash)
         validate_hash = True if validate_hash else False
-        print('validate_hash', validate_hash)
         self.assertEqual(validate_hash, True)
+
+        # testing negative case
         hash = "An35sfad#"
         validate_hash = utils.validate_hash(hash)
         validate_hash = True if validate_hash else False

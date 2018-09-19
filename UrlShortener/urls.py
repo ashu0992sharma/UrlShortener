@@ -22,5 +22,5 @@ from shortener import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^urls/', include("shortener.urls")),
-    url(r'^(?P<hash>.+)?', views.RedirectUrl.as_view(), name="url-redirect")
+    url(r'^(?P<hash>.+)/?', views.RedirectUrl.as_view(), name="url-redirect")
 ]

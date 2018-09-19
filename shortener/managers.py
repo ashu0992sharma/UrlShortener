@@ -12,8 +12,8 @@ class UrlShortenerManager(models.Manager):
         :param url: url to be shortened 
         :return: hash for the url
         """
-        hash = utils.gen_hash(url)
-        url_short_obj, created = self.get_or_create(url=url, defaults={'hash': hash})
+        hash = utils.gen_hash()
+        url_short_obj, _ = self.get_or_create(url=url, defaults={'hash': hash})
         return url_short_obj
     
     def get_url(self, hash):

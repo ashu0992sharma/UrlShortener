@@ -19,6 +19,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^encode/', views.UrlEncode.as_view(), name="url-encode"),
-    url(r'^decode/', views.UrlDecode.as_view(), name="url-decode")
+    url(r'^encode/$', views.UrlEncode.as_view(), name="url-encode"),
+    url(r'^decode/$', views.UrlDecode.as_view(), name="url-decode")
 ]
