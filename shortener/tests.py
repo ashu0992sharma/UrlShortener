@@ -13,7 +13,8 @@ class UrlHashMappingModelTest(TestCase):
 
     def create_obj(self, url):
         """creating object for UrlHashMapping"""
-        return models.UrlHashMapping.objects.get_or_create_short_url(url)
+        hash = utils.gen_hash()
+        return models.UrlHashMapping.objects.create(url=url, hash=hash)
 
     def test_urlhashmapping_creation(self):
         """testing UrlHashMapping object creation"""
@@ -40,7 +41,8 @@ class UrlDecodeTest(TestCase):
 
     def create_obj(self, url):
         """creating object for UrlHashMapping"""
-        return models.UrlHashMapping.objects.get_or_create_short_url(url)
+        hash = utils.gen_hash()
+        return models.UrlHashMapping.objects.create(url=url, hash=hash)
 
     def test_decode(self):
         """testing url decode API"""

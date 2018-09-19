@@ -2,8 +2,10 @@ from rest_framework import serializers
 
 from . import models, utils
 
+from rest_framework_mongoengine import serializers as MongoSerializer
 
-class UrlShortenerCreateSerializer(serializers.ModelSerializer):
+
+class UrlShortenerCreateSerializer(MongoSerializer.DocumentSerializer):
     """serializer for UrlShortener Serializer"""
     url = serializers.URLField()
     hash = serializers.CharField(required=False)
@@ -19,13 +21,14 @@ class UrlShortenerCreateSerializer(serializers.ModelSerializer):
         instance = False
         while not instance:  # retrying if getting duplicate hash 
             try:
-                instance = models.UrlHashMapping.objects.create(**validated_data)
+                # instance = models.UrlHashMapping.objects.create(**validated_data)
+                instance = self.recursive_save(validated_data) 
             except:
                 continue
         return instance
             
 
-class UrlShortenerGetHashSerializer(serializers.ModelSerializer):
+class UrlShortenerGetHashSerializer(MongoSerializer.DocumentSerializer):
     """serializer for UrlShortener Serializer"""
 
     class Meta:
@@ -33,7 +36,7 @@ class UrlShortenerGetHashSerializer(serializers.ModelSerializer):
         fields = ("hash",)
         
         
-class UrlShortenerGetUrlSerializer(serializers.ModelSerializer):
+class UrlShortenerGetUrlSerializer(MongoSerializer.DocumentSerializer):
     """serializer for UrlShortener Serializer"""
 
     class Meta:

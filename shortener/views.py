@@ -49,7 +49,7 @@ class UrlDecode(APIView):
         if serializer.is_valid():
             hash = data["hash"]
             try:
-                url_object = models.UrlHashMapping.objects.get_url(hash)
+                url_object = models.UrlHashMapping.objects.get(hash=hash)
             except ObjectDoesNotExist:
                 data = {"message": constants.URL_OBJECT_DOES_NOT_EXIST}
                 return Response(data, status=status.HTTP_404_NOT_FOUND)
@@ -71,7 +71,7 @@ class RedirectUrl(APIView):
         serializer = serializers.UrlShortenerValidateUrlSerializer(data=data)
         if serializer.is_valid():
             try:
-                url_object = models.UrlHashMapping.objects.get_url(hash)
+                url_object = models.UrlHashMapping.objects.get(hash=hash)
                 return HttpResponseRedirect(url_object.url)
             except ObjectDoesNotExist:
                 data = {
