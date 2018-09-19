@@ -4,12 +4,11 @@ This README would normally document whatever steps are necessary to get your app
 ### Dependencies ###
 
 * Python 3.x
-* PostGreSQL above 9.4
+* mongodb
 
 ### Getting Started ###
 
-* Create a user for postgres : "createuser root "
-* Create a db for the application : "createdb url_shortener"
+* Create a db for the application : "use url_shortener"
 * Set password for the database : <DB_PASSWORD>
 
 
@@ -26,9 +25,6 @@ This README would normally document whatever steps are necessary to get your app
 
 * Enter into terminal
 * cd to project path
-* python manage.py makemigrations
-* python manage.py migrate
-* create a superuser: python manage.py createsuperuser
 * Run python manage.py runserver
 
 
