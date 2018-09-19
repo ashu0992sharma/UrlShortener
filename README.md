@@ -4,7 +4,7 @@ This README would normally document whatever steps are necessary to get your app
 ### Dependencies ###
 
 * Python 3.x
-* mongodb
+* Mongo 3.x
 
 ### Getting Started ###
 
@@ -24,6 +24,7 @@ This README would normally document whatever steps are necessary to get your app
 
 
 * Enter into terminal
+* git clone https://github.com/ashu0992sharma/UrlShortener.git
 * cd to project path
 * Run python manage.py runserver
 
